@@ -1,0 +1,39 @@
+import numpy as np
+import imageio
+
+image = imageio.imread("https://th.bing.com/th/id/OIP.LvaANmRzOisRWpC8Gt7QsQHaE8?pid=ImgDet&rs=1");
+
+A = image[:, :, 1]
+%time u, s, v = np.linalg.svd(A, full_matrices = 0);
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.imshow(image)
+
+plt.subplots(1, 2, figsize=(10, 10))
+plt.subplot(1, 2, 1)
+plt.imshow(A)
+plt.title('The original Lena at the green chanel.')
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+rank = 60
+plt.imshow(u[:, : rank] @ np.diag(s[: rank]) @ v[: rank, :])
+plt.title('The rank-60 Lena at the green chanel.')
+plt.axis('off')
+plt.show()
+
+plt.subplot(1, 2, 2)
+rank = 70
+plt.imshow(u[:, : rank] @ np.diag(s[: rank]) @ v[: rank, :])
+plt.title('The rank-70 Lena at the green chanel.')
+plt.axis('off')
+plt.show()
+
+plt.subplot(1, 2, 2)
+rank = 80
+plt.imshow(u[:, : rank] @ np.diag(s[: rank]) @ v[: rank, :])
+plt.title('The rank-80 Lena at the green chanel.')
+plt.axis('off')
+plt.show()
